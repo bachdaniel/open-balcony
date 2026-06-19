@@ -646,8 +646,14 @@ const gridMap = {
 };
 
 // ── LANGUAGE STATE ─────────────────────────────────────────────
-let currentLang = localStorage.getItem("lang") || "en";
-if (!i18n[currentLang]) currentLang = "en";
+// Default to Danish on every visit. We only remember a language once the
+// visitor actively picks one via the toggle (stored under a fresh key so old
+// auto-saved values don't linger).
+let currentLang = "da";
+try {
+  const saved = localStorage.getItem("ob-lang");
+  if (saved && i18n[saved]) currentLang = saved;
+} catch (e) {}
 
 // Resolve a field that may be a string or an { en, da } object.
 function L(val) {
@@ -698,12 +704,12 @@ function renderCards(gridId, plantList) {
     card.innerHTML = `
       <div class="card-inner">
         <div class="card-front">
-          <div class="card-image-wrap">
+          <div class="card-image-wrap" style="background-image:url('${plant.image}')">
             <img
               src="${plant.image}"
               alt="${name}"
               loading="lazy"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              onerror="this.style.display='none'; this.parentElement.querySelector('.card-placeholder').style.display='flex';"
             />
             <div class="card-placeholder" style="display:none">${emoji}</div>
           </div>
@@ -715,12 +721,12 @@ function renderCards(gridId, plantList) {
         </div>
         <div class="card-back card-back--${motif}">
           <div class="card-back-inner">
-            <div class="card-back-image">
+            <div class="card-back-image" style="background-image:url('${plant.image}')">
               <img
                 src="${plant.image}"
                 alt="${name}"
                 loading="lazy"
-                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                onerror="this.style.display='none'; this.parentElement.querySelector('.card-placeholder').style.display='flex';"
               />
               <div class="card-placeholder" style="display:none">${emoji}</div>
             </div>
@@ -812,10 +818,12 @@ function closeModal() {
 }
 
 // ── LANGUAGE TOGGLE ────────────────────────────────────────────
-function setLang(lang) {
-  if (!i18n[lang]) lang = "en";
+function setLang(lang, persist) {
+  if (!i18n[lang]) lang = "da";
   currentLang = lang;
-  localStorage.setItem("lang", lang);
+  if (persist) {
+    try { localStorage.setItem("ob-lang", lang); } catch (e) {}
+  }
   document.documentElement.lang = lang === "da" ? "da" : "en";
 
   // Static strings
@@ -838,7 +846,7 @@ function setLang(lang) {
 }
 
 document.querySelectorAll(".lang-btn").forEach(btn => {
-  btn.addEventListener("click", () => setLang(btn.dataset.lang));
+  btn.addEventListener("click", () => setLang(btn.dataset.lang, true));
 });
 
 // ── FLIP-AND-ZOOM ──────────────────────────────────────────────
@@ -1031,4 +1039,4 @@ const observer = new IntersectionObserver((entries) => {
 sections.forEach(s => observer.observe(s));
 
 // ── INIT ───────────────────────────────────────────────────────
-setLang(currentLang);   // applies translations + renders all cards
+setLang(currentLang, false);   // applies translations + renders all cards (don't persist the default)
