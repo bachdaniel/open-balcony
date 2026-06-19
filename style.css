@@ -495,12 +495,15 @@ body {
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity .35s ease;
+  cursor: pointer;
+  transition: opacity .35s ease, visibility .35s ease;
 }
 
 .card-scrim.open {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
 }
 
@@ -813,12 +816,14 @@ body.zoom-open .card-nav {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity .35s ease;
+  transition: opacity .35s ease, visibility .35s ease;
 }
 
 .welcome-overlay.open {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
 }
 

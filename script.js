@@ -81,16 +81,13 @@ const i18n = {
 // TODO (review — added 2026-06-19): Double-check the plant identifications
 // below. Confirmed by owner: Grand Award & Morten Korch roses. Best-guess /
 // uncertain and worth a closer look:
-//   • "White Meadow Flower" (PXL_...162956876) — species not identified
 //   • "Aubrieta"            (PXL_...163011674) — guess, confirm
 //   • "Gladiolus"           (PXL_...163121206) — could be iris
 //   • "Bird's-foot Trefoil" & "Tidy Tips" — fairly sure, but verify
-// Lounge uncertain:
-//   • "Raspberry"        (PXL_...053023593) — likely, confirm
-//   • "Yarrow"           (PXL_...163141389) — in bud, confirm at flowering
-//   • "Leafy Greens"     (PXL_...163201582) — rocket or chicory?
-//   • "Silver-leaved Herb" (PXL_...163209782) — tansy/yarrow?
-//   • "Creeping Herb"    (PXL_...163217447) — thyme or oregano?
+// Lounge — owner-confirmed: Blueberry (053023593), Field Scabious/Blåhat (163201582),
+//   Thyme (163217447), Yarrow/Røllike (163209782).
+// Lounge still to verify:
+//   • "Blushing Bride"     (PXL_...163141389) — name confirmed by owner; species/botanical TBD (not yet flowered)
 //   • "White Sweet Clover" (PXL_...163232037) — confirm
 // Update name / botanical / description once confirmed.
 
@@ -217,13 +214,13 @@ const plants = {
       }
     },
     {
-      name: { en: "White Meadow Flower", da: "Hvid engblomst" },
-      botanical: "",
+      name: { en: "White Viper's Bugloss", da: "Hvid slangehoved" },
+      botanical: "Echium vulgare",
       emoji: "🤍",
       image: "images/rose-garden/PXL_20260618_162956876.MP.jpg",
       description: {
-        en: "A delicate white bloom from our wildflower seed mix — we're still confirming exactly which one it is.",
-        da: "En sart hvid blomst fra vores vildblomst-frøblanding — vi er stadig ved at finde ud af præcis hvilken det er."
+        en: "A white viper's bugloss from our wildflower mix — funnel-shaped white blooms on bristly stems, much loved by bees.",
+        da: "En hvid slangehoved fra vores vildblomst-blanding — hvide tragtformede blomster på børstede stængler, meget elsket af bier."
       },
       care: {
         water: { en: "Water moderately", da: "Vand moderat" },
@@ -311,33 +308,33 @@ const plants = {
       }
     },
     {
-      name: { en: "Raspberry", da: "Hindbær" },
-      botanical: "Rubus idaeus",
-      emoji: "🌿",
+      name: { en: "Blueberry", da: "Blåbær" },
+      botanical: "Vaccinium corymbosum",
+      emoji: "🫐",
       image: "images/lounge/PXL_20260521_053023593.MP.jpg",
       description: {
-        en: "The raspberry bush from the February plan, settling into its pots. (We're fairly sure it's the raspberry.) We're hoping for a handful of berries to pick straight from the balcony.",
-        da: "Hindbærbusken fra februar-planen, der falder til i sine krukker. (Vi er ret sikre på, at det er hindbær.) Vi håber på en håndfuld bær at plukke direkte fra altanen."
+        en: "The blueberry bush from the February plan, settling into its pots. We're hoping for a handful of berries to pick straight from the balcony.",
+        da: "Blåbærbusken fra februar-planen, der falder til i sine krukker. Vi håber på en håndfuld bær at plukke direkte fra altanen."
       },
       care: {
         water: { en: "Keep the soil moist", da: "Hold jorden fugtig" },
         sun:   { en: "Sun to part shade", da: "Sol til halvskygge" },
-        tips:  { en: "Cut back the old canes after fruiting", da: "Skær de gamle skud tilbage efter frugtsætning" }
+        tips:  { en: "Blueberries like acidic (ericaceous) soil for the best berries", da: "Blåbær kan lide sur jord (rhododendronjord) for de bedste bær" }
       }
     },
     {
-      name: { en: "Yarrow", da: "Røllike" },
-      botanical: "Achillea sp.",
-      emoji: "🌼",
+      name: { en: "Blushing Bride", da: "Blushing Bride" },
+      botanical: "",
+      emoji: "🌱",
       image: "images/lounge/PXL_20260618_163141389.MP.jpg",
       description: {
-        en: "Soft, feathery foliage coming into bud — we think it's a yarrow, but we'll be sure once it flowers.",
-        da: "Blødt, fjeragtigt løv på vej i knop — vi tror, det er en røllike, men vi er sikre, når den blomstrer."
+        en: "A 'Blushing Bride' — not yet in bloom. We're looking forward to seeing its flowers later in the season.",
+        da: "En 'Blushing Bride' — endnu ikke i blomst. Vi glæder os til at se dens blomster senere på sæsonen."
       },
       care: {
-        water: { en: "Water moderately; drought-tolerant once established", da: "Vand moderat; tørketålende når etableret" },
-        sun:   { en: "Full sun", da: "Fuld sol" },
-        tips:  { en: "Deadhead to prolong flowering", da: "Fjern afblomstrede for længere blomstring" }
+        water: { en: "Water moderately", da: "Vand moderat" },
+        sun:   { en: "Sun to part shade", da: "Sol til halvskygge" },
+        tips:  { en: "Be patient — the flowers are still on their way", da: "Hav tålmodighed — blomsterne er stadig på vej" }
       }
     },
     {
@@ -371,48 +368,48 @@ const plants = {
       }
     },
     {
-      name: { en: "Leafy Greens", da: "Bladgrønt" },
-      botanical: "",
-      emoji: "🌿",
+      name: { en: "Field Scabious", da: "Blåhat" },
+      botanical: "Knautia arvensis",
+      emoji: "🌸",
       image: "images/lounge/PXL_20260618_163201582.MP.jpg",
       description: {
-        en: "A leafy rosette in its own pot — possibly rocket or chicory. We're still working out exactly what we sowed here!",
-        da: "En bladrig roset i sin egen potte — måske rucola eller cikorie. Vi er stadig ved at finde ud af, hvad vi såede her!"
+        en: "A scabious with rounded, lilac-blue pincushion flowers on tall stems — a magnet for bees and butterflies.",
+        da: "En blåhat med runde, lilla-blå nålepude-blomster på høje stængler — en magnet for bier og sommerfugle."
       },
       care: {
-        water: { en: "Keep moist", da: "Hold fugtig" },
-        sun:   { en: "Sun to part shade", da: "Sol til halvskygge" },
-        tips:  { en: "Pick young leaves often", da: "Pluk de unge blade jævnligt" }
+        water: { en: "Water moderately; fairly drought-tolerant", da: "Vand moderat; ret tørketålende" },
+        sun:   { en: "Full sun", da: "Fuld sol" },
+        tips:  { en: "Deadhead to keep the flowers coming", da: "Fjern afblomstrede for at få flere blomster" }
       }
     },
     {
-      name: { en: "Silver-leaved Herb", da: "Sølvbladet urt" },
-      botanical: "",
-      emoji: "🌿",
+      name: { en: "Yarrow", da: "Røllike" },
+      botanical: "Achillea millefolium",
+      emoji: "🌼",
       image: "images/lounge/PXL_20260618_163209782.MP.jpg",
       description: {
-        en: "Soft, silvery, finely-cut foliage with arching stems — perhaps a silver tansy or yarrow. Still to be identified.",
-        da: "Blødt, sølvfarvet, fintsnittet løv med buede stængler — måske en sølv-tanacetum eller røllike. Skal stadig identificeres."
+        en: "Soft, silvery, finely-cut foliage — a yarrow. Its flat clusters of tiny flowers are loved by pollinators.",
+        da: "Blødt, sølvfarvet, fintsnittet løv — en røllike. Dens flade klynger af bittesmå blomster er elsket af bestøvere."
       },
       care: {
-        water: { en: "Water sparingly", da: "Vand sparsomt" },
+        water: { en: "Water sparingly; drought-tolerant once established", da: "Vand sparsomt; tørketålende når etableret" },
         sun:   { en: "Full sun", da: "Fuld sol" },
-        tips:  { en: "Loves dry, free-draining soil", da: "Elsker tør, veldrænet jord" }
+        tips:  { en: "Loves dry, free-draining soil; deadhead to prolong flowering", da: "Elsker tør, veldrænet jord; fjern afblomstrede for længere blomstring" }
       }
     },
     {
-      name: { en: "Creeping Herb", da: "Krybende krydderurt" },
-      botanical: "",
+      name: { en: "Thyme", da: "Timian" },
+      botanical: "Thymus vulgaris",
       emoji: "🌿",
       image: "images/lounge/PXL_20260618_163217447.MP.jpg",
       description: {
-        en: "A low, spreading herb filling a window box — likely thyme or oregano. A pinch of the leaves should tell us soon!",
-        da: "En lav, spredende urt, der fylder en altankasse — sandsynligvis timian eller oregano. En knivspids af bladene afslører det snart!"
+        en: "Creeping thyme spilling over the edge of a window box — fragrant, bee-friendly, and always on hand for the kitchen.",
+        da: "Krybende timian, der hænger ud over kanten af en altankasse — duftende, bivenlig og altid lige ved hånden til køkkenet."
       },
       care: {
-        water: { en: "Water moderately", da: "Vand moderat" },
+        water: { en: "Water moderately; let it dry between waterings", da: "Vand moderat; lad den tørre lidt mellem vandinger" },
         sun:   { en: "Full sun", da: "Fuld sol" },
-        tips:  { en: "Trim regularly and use in the kitchen", da: "Klip jævnligt og brug i køkkenet" }
+        tips:  { en: "Trim after flowering and use fresh or dried", da: "Klip efter blomstring og brug frisk eller tørret" }
       }
     },
     {
@@ -919,6 +916,7 @@ function closeZoom(card, keepScrim) {
   card.style.transform =
     `translate(${target.left - first.left}px, ${target.top - first.top}px) ` +
     `scale(${target.width / first.width}, ${target.height / first.height})`;
+  card.style.pointerEvents = 'none';   // don't let the shrinking card swallow taps (iOS)
   card.classList.remove('flipped');
   card.setAttribute('aria-pressed', 'false');
 
