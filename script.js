@@ -21,6 +21,7 @@ const i18n = {
     "history-desc": "How these balconies came to be — a few moments from over the years.",
     "card-hint": "Tap to read more →",
     "card-flip": "Tap to flip →",
+    "card-play": "Tap to play →",
     "card-flip-back": "← Tap to flip back",
     "modal-care-title": "Plant care",
     "care-water": "Water",
@@ -52,6 +53,7 @@ const i18n = {
     "history-desc": "Hvordan disse altaner blev til — et par øjeblikke gennem årene.",
     "card-hint": "Tryk for at læse mere →",
     "card-flip": "Tryk for at vende →",
+    "card-play": "Tryk for at afspille →",
     "card-flip-back": "← Tryk for at vende tilbage",
     "modal-care-title": "Plantepleje",
     "care-water": "Vand",
@@ -432,6 +434,17 @@ const plants = {
 
   history: [
     {
+      name: { en: "Blog alert!", da: "Blog alert!" },
+      botanical: "Feb 2026",
+      emoji: "🎬",
+      image: "images/history/first-video-poster.jpg",
+      video: "images/history/first-video.mp4",
+      description: {
+        en: "The kickoff — 'Rose Daniel is back!' A little video announcing the balcony project. (Turn the sound on.)",
+        da: "Startskuddet — 'Rose Daniel er tilbage!' En lille video, der annoncerer altan-projektet. (Husk lyd.)"
+      }
+    },
+    {
       name: { en: "A snowy start", da: "En snedækket start" },
       botanical: "20 Feb 2026",
       emoji: "❄️",
@@ -482,6 +495,28 @@ const plants = {
       }
     },
     {
+      name: { en: "A trip to the nursery", da: "Tur til planteskolen" },
+      botanical: "Mar 2026",
+      emoji: "🌹",
+      image: "images/history/marts1-poster.jpg",
+      video: "images/history/marts1.mp4",
+      description: {
+        en: "Rose-Daniel in his element at Lynge nursery — a climbing rose, soil and grasses in the trolley, and a ride on the wooden horse.",
+        da: "Rose-Daniel i sit es på Lynge Planteskole — en slyngrose, jord og græsser i vognen, og en tur på træhesten."
+      }
+    },
+    {
+      name: { en: "Through the trellis", da: "Gennem espalieret" },
+      botanical: "Mar 2026",
+      emoji: "🎥",
+      image: "images/history/marts-poster.jpg",
+      video: "images/history/marts.mp4",
+      description: {
+        en: "A quick clip panning past the black trellis — the build coming together.",
+        da: "Et hurtigt klip forbi det sorte espalier — byggeriet, der tager form."
+      }
+    },
+    {
       name: { en: "First plantings", da: "De første planter" },
       botanical: "9 Mar 2026",
       emoji: "🪴",
@@ -489,6 +524,17 @@ const plants = {
       description: {
         en: "Bare cuttings and twigs go into the new boxes. It doesn't look like much yet — but it's a start.",
         da: "Bare stiklinger og kviste kommer i de nye kasser. Det ligner ikke meget endnu — men det er en begyndelse."
+      }
+    },
+    {
+      name: { en: "Potting up the rose", da: "Rosen plantes" },
+      botanical: "Mar 2026",
+      emoji: "🪴",
+      image: "images/history/marts2-poster.jpg",
+      video: "images/history/marts2.mp4",
+      description: {
+        en: "Back home, getting the new climbing rose into its pot on the balcony — soil bags everywhere.",
+        da: "Hjemme igen, hvor den nye slyngrose kommer i potten på altanen — jordsække overalt."
       }
     },
     {
@@ -592,6 +638,17 @@ const plants = {
       }
     },
     {
+      name: { en: "Petal bath", da: "Bad med rosenblade" },
+      botanical: "Jun 2026",
+      emoji: "🛁",
+      image: "images/history/june-poster.jpg",
+      video: "images/history/june.mp4",
+      description: {
+        en: "Midsummer fun — the kids splashing in a tub on the deck, rose petals floating in the water.",
+        da: "Sommersjov — børnene pjasker i et badekar på terrassen, med rosenblade i vandet."
+      }
+    },
+    {
       name: { en: "Everything growing", da: "Alt gror" },
       botanical: "7 Jun 2026",
       emoji: "🌾",
@@ -683,6 +740,7 @@ function renderCards(gridId, plantList) {
     const name = L(plant.name);
     const emoji = plant.emoji || '🌿';
     const motif = LEAF_EMOJIS.includes(emoji) ? 'leaf' : 'flower';
+    const isVideo = !!plant.video;   // video cards show a play badge + a <video> on the back
 
     // Care list for the back (skipped entirely for non-plant cards)
     const care = plant.care || {};
@@ -709,23 +767,26 @@ function renderCards(gridId, plantList) {
               onerror="this.style.display='none'; this.parentElement.querySelector('.card-placeholder').style.display='flex';"
             />
             <div class="card-placeholder" style="display:none">${emoji}</div>
+            ${isVideo ? '<div class="video-badge" aria-hidden="true">▶</div>' : ''}
           </div>
           <div class="card-body">
             <p class="card-name">${name}</p>
             ${plant.botanical ? `<p class="card-botanical">${plant.botanical}</p>` : ''}
-            <p class="card-hint">${i18n[currentLang]["card-flip"]}</p>
+            <p class="card-hint">${isVideo ? i18n[currentLang]["card-play"] : i18n[currentLang]["card-flip"]}</p>
           </div>
         </div>
         <div class="card-back card-back--${motif}">
           <div class="card-back-inner">
             <div class="card-back-image" style="background-image:url('${plant.image}')">
-              <img
+              ${isVideo
+                ? `<video class="card-video" controls playsinline preload="none" poster="${plant.image}"><source src="${plant.video}" type="video/mp4"></video>`
+                : `<img
                 src="${plant.image}"
                 alt="${name}"
                 loading="lazy"
                 onerror="this.style.display='none'; this.parentElement.querySelector('.card-placeholder').style.display='flex';"
               />
-              <div class="card-placeholder" style="display:none">${emoji}</div>
+              <div class="card-placeholder" style="display:none">${emoji}</div>`}
             </div>
             <p class="card-name">${name}</p>
             ${plant.botanical ? `<p class="card-botanical">${plant.botanical}</p>` : ''}
@@ -962,6 +1023,16 @@ function pageTo(offset) {
 
 // ── EVENT LISTENERS ────────────────────────────────────────────
 document.addEventListener('click', (e) => {
+  // Tapping anywhere in a video's media area starts playback (and never closes
+  // the card). Once playing, the native controls handle pause/seek/sound.
+  const media = e.target.closest('.card-back-image');
+  if (media) {
+    const video = media.querySelector('.card-video');
+    if (video) {
+      if (video.paused) video.play().catch(() => {});
+      return;
+    }
+  }
   if (e.target.closest('.card-scrim')) { closeZoom(openCard); return; }
   const card = e.target.closest('.plant-card');
   if (!card) return;
