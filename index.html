@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open Balcony</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── HERO ──────────────────────────────────────────────── -->
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="hero-label">Welcome to our</p>
+      <h1>Open Balcony</h1>
+      <p class="hero-sub">Come explore our little green world — two balconies, countless stories.</p>
+    </div>
+  </header>
+
+  <!-- ── STICKY NAV ────────────────────────────────────────── -->
+  <nav class="section-nav" id="main-nav">
+    <a href="#rose-garden">🌹 Rose Garden</a>
+    <span class="nav-sep">·</span>
+    <a href="#lounge">🌿 The Lounge</a>
+  </nav>
+
+  <!-- ── THE STORY ─────────────────────────────────────────── -->
+  <section class="story" id="story">
+    <div class="container">
+      <h2>Getting Ready for Summer</h2>
+      <div class="story-body">
+        <p>
+          Every spring, there's a quiet ritual on our balconies. The first warm day calls for dragging
+          out the overwintered pots, checking which roots survived, and deciding who gets a new home.
+          This year was no different — except that we gave ourselves more time, and it showed.
+        </p>
+        <p>
+          The Rose Garden got its annual hard prune in March, before the buds broke. We were brutal
+          this time, cutting back further than felt comfortable, and the roses rewarded us with the
+          strongest growth we've seen in years. Meanwhile, the Lounge balcony went through a full
+          refresh: new soil, new pots, and a careful arrangement that finally makes it feel like a
+          room you want to sit in.
+        </p>
+        <p>
+          We're happy you're here to see it. Tap any plant card to learn a bit about who it is, and
+          how it ended up on our balcony.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ROSE GARDEN ───────────────────────────────────────── -->
+  <section class="plant-section" id="rose-garden">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-icon">🌹</span>
+        <h2>The Rose Garden</h2>
+        <p class="section-desc">Our south-facing balcony — full sun, climbing roses, and all the bees.</p>
+      </div>
+      <div class="card-grid" id="rose-garden-grid"></div>
+    </div>
+  </section>
+
+  <!-- ── LOUNGE ─────────────────────────────────────────────── -->
+  <section class="plant-section" id="lounge">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-icon">🌿</span>
+        <h2>The Lounge</h2>
+        <p class="section-desc">A shaded retreat with lush foliage, herbs, and a comfortable chair.</p>
+      </div>
+      <div class="card-grid" id="lounge-grid"></div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Made with care &amp; soil — Open Balcony 2025</p>
+  </footer>
+
+  <!-- ── MODAL ──────────────────────────────────────────────── -->
+  <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-name">
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+      <div class="modal-image-wrap">
+        <img class="modal-image" id="modal-image" src="" alt="" />
+        <div class="modal-image-placeholder" id="modal-placeholder"></div>
+      </div>
+      <div class="modal-body">
+        <h3 class="modal-name" id="modal-name"></h3>
+        <p class="modal-botanical" id="modal-botanical"></p>
+        <p class="modal-desc" id="modal-desc"></p>
+        <div class="modal-care" id="modal-care">
+          <h4>Plant care</h4>
+          <ul id="modal-care-list"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

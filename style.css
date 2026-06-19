@@ -1,0 +1,430 @@
+/* ── TOKENS ─────────────────────────────────────────────────── */
+:root {
+  --bg:         #faf8f4;
+  --surface:    #ffffff;
+  --green-dark: #3d6b4f;
+  --green-mid:  #5a8a6e;
+  --green-pale: #e8f0eb;
+  --terra:      #c4694f;
+  --terra-pale: #f5ede9;
+  --text:       #2a2a2a;
+  --text-muted: #6b6b6b;
+  --border:     #e2ddd6;
+
+  --radius-card: 14px;
+  --radius-modal: 18px;
+  --shadow-card: 0 2px 12px rgba(0,0,0,.08);
+  --shadow-hover: 0 8px 28px rgba(0,0,0,.14);
+  --shadow-modal: 0 20px 60px rgba(0,0,0,.25);
+
+  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-sans:  system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --nav-h: 52px;
+}
+
+/* ── RESET ───────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font: inherit; border: none; background: none; }
+
+/* ── BASE ────────────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.container {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* ── HERO ────────────────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(160deg, var(--green-dark) 0%, #2a4d38 100%);
+  color: #fff;
+  padding: 4rem 1.25rem 3.5rem;
+  text-align: center;
+}
+
+.hero-inner { max-width: 640px; margin: 0 auto; }
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: .8rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  opacity: .72;
+  margin-bottom: .5rem;
+}
+
+.hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  font-weight: normal;
+  line-height: 1.2;
+  margin-bottom: .9rem;
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  opacity: .82;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* ── NAV ─────────────────────────────────────────────────────── */
+.section-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  font-size: .9rem;
+}
+
+.section-nav a {
+  padding: .3rem .6rem;
+  border-radius: 6px;
+  transition: background .15s, color .15s;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.section-nav a:hover,
+.section-nav a.active {
+  background: var(--green-pale);
+  color: var(--green-dark);
+}
+
+.nav-sep { color: var(--border); user-select: none; }
+
+/* ── STORY ───────────────────────────────────────────────────── */
+.story {
+  padding: 3.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.story h2 {
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  font-weight: normal;
+  color: var(--green-dark);
+  margin-bottom: 1.2rem;
+}
+
+.story-body {
+  max-width: 680px;
+}
+
+.story-body p {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.story-body p:last-child { margin-bottom: 0; }
+
+/* ── PLANT SECTIONS ──────────────────────────────────────────── */
+.plant-section {
+  padding: 3rem 0 3.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.plant-section:last-of-type { border-bottom: none; }
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  margin-bottom: 2rem;
+}
+
+.section-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.section-header h2 {
+  font-family: var(--font-serif);
+  font-size: 1.9rem;
+  font-weight: normal;
+  color: var(--green-dark);
+}
+
+.section-desc {
+  color: var(--text-muted);
+  font-size: .95rem;
+}
+
+/* ── CARD GRID ───────────────────────────────────────────────── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.1rem;
+}
+
+/* ── PLANT CARD ──────────────────────────────────────────────── */
+.plant-card {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease;
+  border: 1px solid var(--border);
+}
+
+.plant-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.plant-card:active { transform: translateY(-1px); }
+
+.card-image-wrap {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--green-pale);
+}
+
+.card-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .35s ease;
+}
+
+.plant-card:hover .card-image-wrap img {
+  transform: scale(1.04);
+}
+
+.card-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  background: linear-gradient(135deg, var(--green-pale), #d4e8d8);
+}
+
+.card-body {
+  padding: .75rem 1rem .9rem;
+}
+
+.card-name {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  color: var(--text);
+  margin-bottom: .15rem;
+}
+
+.card-botanical {
+  font-size: .78rem;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.card-hint {
+  margin-top: .5rem;
+  font-size: .75rem;
+  color: var(--green-mid);
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+}
+
+/* ── MODAL OVERLAY ───────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(20, 30, 24, .65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .22s ease;
+  backdrop-filter: blur(3px);
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── MODAL CARD ──────────────────────────────────────────────── */
+.modal-card {
+  background: var(--surface);
+  border-radius: var(--radius-modal);
+  box-shadow: var(--shadow-modal);
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  transform: translateY(18px) scale(.97);
+  transition: transform .25s ease;
+  scrollbar-width: thin;
+}
+
+.modal-overlay.open .modal-card {
+  transform: translateY(0) scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: .75rem;
+  right: .75rem;
+  z-index: 10;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0,0,0,.35);
+  color: #fff;
+  font-size: .85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s;
+}
+
+.modal-close:hover { background: rgba(0,0,0,.6); }
+
+/* ── MODAL IMAGE ─────────────────────────────────────────────── */
+.modal-image-wrap {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--green-pale);
+  border-radius: var(--radius-modal) var(--radius-modal) 0 0;
+}
+
+.modal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-image-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  background: linear-gradient(135deg, var(--green-pale), #c8dfc9);
+}
+
+/* ── MODAL BODY ──────────────────────────────────────────────── */
+.modal-body {
+  padding: 1.4rem 1.5rem 1.8rem;
+}
+
+.modal-name {
+  font-family: var(--font-serif);
+  font-size: 1.55rem;
+  font-weight: normal;
+  color: var(--green-dark);
+  margin-bottom: .2rem;
+}
+
+.modal-botanical {
+  font-style: italic;
+  font-size: .88rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.modal-botanical:empty { display: none; }
+
+.modal-desc {
+  color: var(--text);
+  font-size: .98rem;
+  margin-bottom: 1.4rem;
+  line-height: 1.7;
+}
+
+/* ── MODAL CARE ──────────────────────────────────────────────── */
+.modal-care {
+  background: var(--green-pale);
+  border-radius: 10px;
+  padding: 1rem 1.1rem 1.1rem;
+}
+
+.modal-care h4 {
+  font-family: var(--font-sans);
+  font-size: .75rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--green-dark);
+  margin-bottom: .7rem;
+}
+
+.modal-care ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.modal-care li {
+  display: flex;
+  gap: .6rem;
+  font-size: .9rem;
+  color: var(--text);
+  align-items: flex-start;
+}
+
+.care-icon {
+  flex-shrink: 0;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
+.site-footer {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  font-size: .82rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .hero { padding: 3rem 1.25rem 2.5rem; }
+
+  .modal-card { max-height: 95vh; }
+
+  .modal-body { padding: 1.1rem 1.2rem 1.5rem; }
+
+  .section-header h2 { font-size: 1.55rem; }
+}
+
+@media (min-width: 600px) {
+  .card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .story { padding: 4rem 0; }
+  .plant-section { padding: 3.5rem 0 4rem; }
+}
