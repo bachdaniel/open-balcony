@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open Balcony — QR Code</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #faf8f4;
+      font-family: Georgia, serif;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2.5rem 3rem;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(0,0,0,.10);
+      max-width: 380px;
+      width: 100%;
+    }
+
+    .label {
+      font-size: .75rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #6b6b6b;
+      margin-bottom: .4rem;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      font-weight: normal;
+      color: #3d6b4f;
+      margin-bottom: .3rem;
+    }
+
+    .tagline {
+      font-size: .95rem;
+      color: #6b6b6b;
+      margin-bottom: 2rem;
+    }
+
+    #qrcode {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    #qrcode canvas,
+    #qrcode img {
+      border-radius: 6px;
+    }
+
+    .url {
+      font-family: system-ui, sans-serif;
+      font-size: .78rem;
+      color: #3d6b4f;
+      word-break: break-all;
+      margin-bottom: 1.8rem;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #e2ddd6;
+      margin-bottom: 1.5rem;
+    }
+
+    .instructions {
+      font-family: system-ui, sans-serif;
+      font-size: .82rem;
+      color: #6b6b6b;
+      line-height: 1.6;
+    }
+
+    .print-btn {
+      margin-top: 2rem;
+      padding: .65rem 1.8rem;
+      background: #3d6b4f;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: system-ui, sans-serif;
+      font-size: .9rem;
+      cursor: pointer;
+    }
+
+    .print-btn:hover { background: #2f5540; }
+
+    @media print {
+      body { background: #fff; }
+      .card { box-shadow: none; }
+      .print-btn { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <p class="label">You're invited to our</p>
+    <h1>Open Balcony</h1>
+    <p class="tagline">Scan to explore the plants 🌹🌿</p>
+
+    <div id="qrcode"></div>
+
+    <p class="url">bachdaniel.github.io/open-balcony/</p>
+
+    <hr class="divider" />
+
+    <p class="instructions">
+      Scan the QR code with your phone camera<br />
+      to see info about all our plants.
+    </p>
+
+    <button class="print-btn" onclick="window.print()">Print this page</button>
+  </div>
+
+  <script>
+    new QRCode(document.getElementById('qrcode'), {
+      text: 'https://bachdaniel.github.io/open-balcony/',
+      width: 220,
+      height: 220,
+      colorDark: '#2a2a2a',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  </script>
+</body>
+</html>
