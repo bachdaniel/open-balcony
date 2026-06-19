@@ -105,6 +105,19 @@
   <div class="card-scrim" id="card-scrim" aria-hidden="true"></div>
   <button type="button" class="card-nav card-nav-prev" id="card-nav-prev" aria-label="Previous">‹</button>
   <button type="button" class="card-nav card-nav-next" id="card-nav-next" aria-label="Next">›</button>
+  <button type="button" class="card-close" id="card-close" aria-label="Luk">✕</button>
+
+  <!-- ── VIDEO PLAYER OVERLAY ───────────────────────────────── -->
+  <div class="video-lightbox" id="video-lightbox" aria-hidden="true">
+    <button type="button" class="lb-close" id="video-close" aria-label="Luk">✕</button>
+    <div class="video-lightbox-inner">
+      <video id="lightbox-video" class="lightbox-video" controls playsinline></video>
+      <div class="video-caption">
+        <h3 id="lightbox-title"></h3>
+        <p id="lightbox-desc"></p>
+      </div>
+    </div>
+  </div>
 
   <!-- ── MODAL ──────────────────────────────────────────────── -->
   <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-name">

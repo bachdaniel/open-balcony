@@ -778,15 +778,13 @@ function renderCards(gridId, plantList) {
         <div class="card-back card-back--${motif}">
           <div class="card-back-inner">
             <div class="card-back-image" style="background-image:url('${plant.image}')">
-              ${isVideo
-                ? `<video class="card-video" controls playsinline preload="none" poster="${plant.image}"><source src="${plant.video}" type="video/mp4"></video>`
-                : `<img
+              <img
                 src="${plant.image}"
                 alt="${name}"
                 loading="lazy"
                 onerror="this.style.display='none'; this.parentElement.querySelector('.card-placeholder').style.display='flex';"
               />
-              <div class="card-placeholder" style="display:none">${emoji}</div>`}
+              <div class="card-placeholder" style="display:none">${emoji}</div>
             </div>
             <p class="card-name">${name}</p>
             ${plant.botanical ? `<p class="card-botanical">${plant.botanical}</p>` : ''}
@@ -1023,29 +1021,25 @@ function pageTo(offset) {
 
 // ── EVENT LISTENERS ────────────────────────────────────────────
 document.addEventListener('click', (e) => {
-  // Tapping anywhere in a video's media area starts playback (and never closes
-  // the card). Once playing, the native controls handle pause/seek/sound.
-  const media = e.target.closest('.card-back-image');
-  if (media) {
-    const video = media.querySelector('.card-video');
-    if (video) {
-      if (video.paused) video.play().catch(() => {});
-      return;
-    }
-  }
   if (e.target.closest('.card-scrim')) { closeZoom(openCard); return; }
   const card = e.target.closest('.plant-card');
   if (!card) return;
-  if (card.classList.contains('zoomed')) closeZoom(card);
-  else openZoom(card);
+  if (card.classList.contains('zoomed')) { closeZoom(card); return; }
+  // Video cards open a flat player overlay; plant cards flip-and-zoom
+  const list = plants[gridMap[card.dataset.section]];
+  const plant = list && list[card.dataset.index];
+  if (plant && plant.video) { openVideo(plant); return; }
+  openZoom(card);
 });
 
-document.getElementById('card-nav-prev').addEventListener('click', (e) => { e.stopPropagation(); pageTo(-1); });
-document.getElementById('card-nav-next').addEventListener('click', (e) => { e.stopPropagation(); pageTo(1); });
+document.getElementById('card-nav-prev')?.addEventListener('click', (e) => { e.stopPropagation(); pageTo(-1); });
+document.getElementById('card-nav-next')?.addEventListener('click', (e) => { e.stopPropagation(); pageTo(1); });
+document.getElementById('card-close')?.addEventListener('click', (e) => { e.stopPropagation(); closeZoom(openCard); });
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
-    if (welcomeOverlay.classList.contains('open')) closeWelcome();
+    if (welcomeOverlay && welcomeOverlay.classList.contains('open')) closeWelcome();
+    else if (lightbox && lightbox.classList.contains('open')) closeVideo();
     else closeZoom(openCard);
   } else if (openCard) {
     if (e.key === 'ArrowLeft')  pageTo(-1);
@@ -1056,26 +1050,55 @@ document.addEventListener('keydown', (e) => {
 // A resize would leave the centered card misplaced — just close it
 window.addEventListener('resize', () => { if (openCard) closeZoom(openCard); });
 
+// ── VIDEO PLAYER OVERLAY ───────────────────────────────────────
+// A flat, centered player (no 3D transform) so videos play reliably on iOS.
+const lightbox = document.getElementById('video-lightbox');
+const lbVideo  = document.getElementById('lightbox-video');
+const lbTitle  = document.getElementById('lightbox-title');
+const lbDesc   = document.getElementById('lightbox-desc');
+
+function openVideo(plant) {
+  if (!lightbox || !lbVideo) return;
+  lbVideo.src = plant.video;
+  lbVideo.poster = plant.image;
+  if (lbTitle) lbTitle.textContent = L(plant.name);
+  if (lbDesc)  lbDesc.textContent = L(plant.description);
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  lbVideo.play().catch(() => {});
+}
+
+function closeVideo() {
+  if (!lightbox || !lbVideo) return;
+  lbVideo.pause();
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('video-close')?.addEventListener('click', (e) => { e.stopPropagation(); closeVideo(); });
+lightbox?.addEventListener('click', (e) => { if (e.target === lightbox) closeVideo(); });
+
 // ── WELCOME POPUP ──────────────────────────────────────────────
 // Shown once per browser (first visit, e.g. when arriving via the QR code).
 const welcomeOverlay = document.getElementById('welcome-overlay');
 const welcomeClose = document.getElementById('welcome-close');
 
 function closeWelcome() {
+  if (!welcomeOverlay) return;
   welcomeOverlay.classList.remove('open');
   document.body.style.overflow = '';
   try { localStorage.setItem('welcomed', '1'); } catch (e) {}
 }
 
-welcomeClose.addEventListener('click', closeWelcome);
-welcomeOverlay.addEventListener('click', (e) => {
+welcomeClose?.addEventListener('click', closeWelcome);
+welcomeOverlay?.addEventListener('click', (e) => {
   if (e.target === welcomeOverlay) closeWelcome();
 });
 
 let alreadyWelcomed = false;
 try { alreadyWelcomed = localStorage.getItem('welcomed') === '1'; } catch (e) {}
 
-if (!alreadyWelcomed) {
+if (welcomeOverlay && !alreadyWelcomed) {
   welcomeOverlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
